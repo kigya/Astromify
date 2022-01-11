@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_landscape_background">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal_top_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal_start_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="80dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal_end_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="80dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal_bottom_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="40dp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logo_book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_logo_book"
+        app:layout_constraintStart_toEndOf="@id/horizontal_start_guide"
+        app:layout_constraintTop_toBottomOf="@+id/horizontal_top_guide" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/horizontal_start_guide"
+        app:layout_constraintTop_toBottomOf="@+id/logo_book">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/question_title_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/abhaya_libre_semibold"
+            android:text="@string/question"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/question_book_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/abhaya_libre_semibold"
+            android:gravity="center"
+            android:text="@string/number_question"
+            android:textColor="@color/white"
+            android:textSize="100sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/difficulty_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        app:layout_constraintEnd_toStartOf="@id/horizontal_end_guide"
+        app:layout_constraintStart_toEndOf="@+id/horizontal_start_guide"
+        app:layout_constraintTop_toBottomOf="@id/horizontal_top_guide">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/lato_bold"
+            android:text="@string/difficulty"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/difficulty_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_difficultylow" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/question_block_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="40dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/horizontal_end_guide"
+        app:layout_constraintTop_toBottomOf="@+id/difficulty_linear"
+        tools:layout_editor_absoluteX="440dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/question_text"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/abhaya_libre"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/guide_right"
+            app:layout_constraintStart_toStartOf="@+id/guide_left"
+            app:layout_constraintTop_toBottomOf="@+id/difficulty_block"
+            tools:text="@string/question_1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toStartOf="@+id/horizontal_end_guide"
+        app:layout_constraintTop_toBottomOf="@+id/question_block_linear">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_false"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:width="100dp"
+            android:backgroundTint="@color/button_background"
+            android:fontFamily="@font/lato_bold"
+            android:text="@string/false_text"
+            android:textSize="12sp"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/button_true"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@+id/guide_left"
+            app:layout_constraintTop_toBottomOf="@+id/question_text"
+            tools:ignore="SmallSp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_next"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="70dp"
+            android:width="100dp"
+            android:backgroundTint="@color/button_background"
+            android:fontFamily="@font/lato_bold"
+            android:text="@string/next"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/question_text"
+            tools:ignore="SmallSp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_true"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:width="100dp"
+            android:backgroundTint="@color/button_background"
+            android:fontFamily="@font/lato_bold"
+            android:text="@string/true_text"
+            android:textSize="12sp"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/guide_right"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/button_false"
+            app:layout_constraintTop_toBottomOf="@+id/question_text"
+            tools:ignore="SmallSp" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/answer_text"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/abhaya_libre"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/horizontal_end_guide"
+        app:layout_constraintTop_toBottomOf="@+id/question_block_linear"
+        app:layout_constraintVertical_bias="0.395"
+        tools:text="@string/answer_1" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/answer_result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="212dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/lato_bold"
+        android:text="@string/incorrect_toast"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal_bottom_guide"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="1.0"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

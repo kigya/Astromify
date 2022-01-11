@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="170dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/answer_result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:text="@string/incorrect_toast"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/guide_top"
+        app:layout_constraintEnd_toStartOf="@+id/guide_right"
+        app:layout_constraintStart_toEndOf="@+id/guide_left"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logo_book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_logo_book"
+        app:layout_constraintStart_toEndOf="@+id/guide_left"
+        app:layout_constraintEnd_toStartOf="@+id/guide_right"
+        app:layout_constraintTop_toBottomOf="@+id/guide_top"
+        android:layout_marginTop="30dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/question_title_book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/abhaya_libre_semibold"
+        android:text="@string/question"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/question_book_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_book"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/question_book_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/abhaya_libre_semibold"
+        android:text="@string/number_question"
+        android:textColor="@color/white"
+        android:textSize="100sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_title_book"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <LinearLayout
+        android:id="@+id/difficulty_block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guide_right"
+        app:layout_constraintStart_toStartOf="@+id/guide_left"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/difficulty_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/lato_bold"
+            android:text="@string/difficulty"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/difficulty_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_difficultylow" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/question_text"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/abhaya_libre"
+        android:gravity="center"
+        tools:text="@string/question_1"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/guide_right"
+        app:layout_constraintStart_toStartOf="@+id/guide_left"
+        app:layout_constraintTop_toBottomOf="@+id/difficulty_block"
+        android:visibility="visible"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_false"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:width="100dp"
+        android:backgroundTint="@color/button_background"
+        android:fontFamily="@font/lato_bold"
+        android:text="@string/false_text"
+        android:textSize="12sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/button_true"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/guide_left"
+        app:layout_constraintTop_toBottomOf="@+id/question_text"
+        tools:ignore="SmallSp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_next"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:width="100dp"
+        android:backgroundTint="@color/button_background"
+        android:fontFamily="@font/lato_bold"
+        android:text="@string/next"
+        android:textSize="12sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_text"
+        tools:ignore="SmallSp"
+        android:visibility="gone"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_true"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:width="100dp"
+        android:backgroundTint="@color/button_background"
+        android:fontFamily="@font/lato_bold"
+        android:text="@string/true_text"
+        android:textSize="12sp"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guide_right"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/button_false"
+        app:layout_constraintTop_toBottomOf="@+id/question_text"
+        tools:ignore="SmallSp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/answer_text"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/abhaya_libre"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guide_right"
+        app:layout_constraintStart_toStartOf="@+id/guide_left"
+        app:layout_constraintTop_toBottomOf="@+id/question_text"
+        tools:text="@string/answer_1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

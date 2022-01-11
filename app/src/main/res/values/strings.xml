@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Astromify</string>
+    <string name="question">Question</string>
+    <string name="number_question">1</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="question_1">Apollo astronauts collected Moon rocks for analysis. Astronauts haven\'t traveled to Mars to collect rocks, so we don\'t have any pieces of Mars to analyze.</string>
+    <string name="question_2">Sunlight requires nearly 25 seconds to reach Earth.</string>
+    <string name="question_3">The Moon is larger in surface area than the United States</string>
+    <string name="question_4">Jupiter is more massive than all the other planets in our solar system put together</string>
+    <string name="question_5">Approximately 90% of our galaxy might contain dark matter.</string>
+    <string name="question_6">Of the four inner planets (Mercury, Venus, Earth, and Mars), Mars has the coolest surface temperature</string>
+    <string name="question_7">Blue stars are much cooler than red stars.</string>
+    <string name="question_8">Two spaceships leave earth in opposite directions, each traveling 0.9 times the speed of light. These two spaceships would never be able to communicate with each other.</string>
+    <string name="question_9">The sun is one of the smallest stars in the galaxy.</string>
+    <string name="question_10">One astronomical unit is equal to the diameter of the solar system.</string>
+    <string name="answer_1">We know Martian chemistry because of analysis that probes and lenders have conducted on the Mars material.</string>
+    <string name="answer_2">Sunlight requires 8.4 minutes to reach Earth.</string>
+    <string name="answer_3">The Moon\'s surface is almost equal to the combined surface area of North and South America</string>
+    <string name="answer_4">Jupiter\'s mass is greater than the combined mass of all the other planets in our solar system.</string>
+    <string name="answer_5">We believe that ninety percent of the galaxy might exist in a form we cannot "see." We determined its existence by analyzing stellar motions and realizing that stars wouldn\'t move as quickly as they do if the only matter in the galaxy was the visible matter.</string>
+    <string name="answer_6">Surprisingly, all the four inner worlds, the coolest surface is on Mercury. It rotates once every 60 Earth days and has hardly any atmosphere. So, when it turns away from the Sun, it radiates it heat into space and its surface temperature plunges to less than 200 degrees below zero!</string>
+    <string name="answer_7">The blue and blue/white stars are the truly hot ones. The red stars are cool, comparatively.</string>
+    <string name="answer_8">Even though, from Earth, these spaceships would appear to be moving away from each other at 1.8 times the speed of light, the relative speed between them would be less than the speed of light. Relativity is weird.</string>
+    <string name="answer_9">At least 85% of stars in the Milky Way are smaller than the sun. Large stars tend to have short life spans.</string>
+    <string name="answer_10">One astronomical unit is the distance from Earth to the Sun.</string>
+    <string name="false_text">False</string>
+    <string name="true_text">True</string>
+    <string name="correct_toast">Correct!</string>
+    <string name="incorrect_toast">Incorrect!</string>
+    <string name="next">Next</string>
+    <string name="result">Result</string>
+    <string name="quit">Quit</string>
+</resources>
