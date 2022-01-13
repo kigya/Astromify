@@ -1,11 +1,13 @@
 package com.bignerdranchguide.astromify
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
+import com.bignerdranchguide.astromify.extensions.log
 import com.bignerdranchguide.astromify.lifecycle.LifecycleEventObserver
 import com.google.android.material.button.MaterialButton
 import kotlin.properties.Delegates
@@ -21,43 +23,24 @@ private lateinit var difficultyState: AppCompatImageView
 private lateinit var difficultyText: AppCompatTextView
 private lateinit var questionTitleText: AppCompatTextView
 
-private val questionBank = listOf(
-    Question(R.string.question_1, false),
-    Question(R.string.question_2, false),
-    Question(R.string.question_3, true),
-    Question(R.string.question_4, true),
-    Question(R.string.question_5, true),
-    Question(R.string.question_6, false),
-    Question(R.string.question_7, false),
-    Question(R.string.question_8, false),
-    Question(R.string.question_9, false),
-    Question(R.string.question_10, false)
-)
-
-private val answerBank = listOf(
-    Answer(R.string.answer_1),
-    Answer(R.string.answer_2),
-    Answer(R.string.answer_3),
-    Answer(R.string.answer_4),
-    Answer(R.string.answer_5),
-    Answer(R.string.answer_6),
-    Answer(R.string.answer_7),
-    Answer(R.string.answer_8),
-    Answer(R.string.answer_9),
-    Answer(R.string.answer_10)
-)
-
-private var currentIndex = 0
-private var correctAmount = 0
+private const val KEY_INDEX = "index"
 
 private val observer = LifecycleEventObserver()
 
 class MainActivity : AppCompatActivity() {
+
+    private val quizViewModel: QuizViewModel by lazy {
+        ViewModelProvider(this).get(QuizViewModel::class.java)
+    }
+
     @SuppressLint("ResourceType", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.astromify_main)
         lifecycle.addObserver(observer)
+
+        val currentIndex = savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
+        quizViewModel.currentIndex = currentIndex
 
         trueButton = findViewById(R.id.button_true)
         falseButton = findViewById(R.id.button_false)
@@ -89,8 +72,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         nextButton.setOnClickListener {
-            currentIndex = (currentIndex + 1)
-            if (currentIndex != 10) {
+            quizViewModel.moveToNext()
+            if (quizViewModel.currentIndex != 10) {
                 updateQuestion()
                 hideNextButton()
                 showTrueButton()
@@ -98,8 +81,8 @@ class MainActivity : AppCompatActivity() {
                 hideAnswer()
                 updateQuestionNumber()
                 hideResultText()
-                if (currentIndex > 2) {
-                    if (currentIndex > 5) {
+                if (quizViewModel.currentIndex > 2) {
+                    if (quizViewModel.currentIndex > 5) {
                         difficultyState.setImageResource(R.drawable.ic_difficultyhard)
                     } else {
                         difficultyState.setImageResource(R.drawable.ic_difficultymedium)
@@ -114,35 +97,42 @@ class MainActivity : AppCompatActivity() {
                 hideDifficultyState()
                 hideQuestionText()
                 questionTitleText.setText(R.string.result)
-                questionBookNumber.text = "${(correctAmount * 10)}%"
+                questionBookNumber.text = "${(quizViewModel.correctAmount * 10)}%"
                 nextButton.setText(R.string.quit)
             }
         }
 
         updateQuestion()
         updateAnswer()
+        updateQuestionNumber()
+    }
+
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        super.onSaveInstanceState(savedInstanceState)
+        log(this, "onSaveInstanceState")
+        savedInstanceState.putInt(KEY_INDEX, quizViewModel.currentIndex)
     }
 
     private fun updateQuestion() {
-        val questionTextResId = questionBank[currentIndex].textResId
+        val questionTextResId = quizViewModel.currentQuestionText
         questionTextView.setText(questionTextResId)
     }
 
     private fun updateAnswer() {
-        val answerTextResId = answerBank[currentIndex].textResId
+        val answerTextResId = quizViewModel.currentQuestionText
         answerTextView.setText(answerTextResId)
     }
 
     private fun updateQuestionNumber() {
-        questionBookNumber.text = (currentIndex + 1).toString()
+        questionBookNumber.text = (quizViewModel.currentIndex + 1).toString()
     }
 
     private fun checkAnswer(userAnswer: Boolean) {
-        val correctAnswer = questionBank[currentIndex].answer
+        val correctAnswer = quizViewModel.currentQuestionAnswer
         var messageResId by Delegates.notNull<Int>()
         if (userAnswer == correctAnswer) {
             messageResId = R.string.correct_toast
-            correctAmount++
+            quizViewModel.correctAmount++
         } else {
             messageResId = R.string.incorrect_toast
         }
