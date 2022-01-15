@@ -1,12 +1,20 @@
-package com.bignerdranchguide.astromify
+package com.bignerdranchguide.astromify.mainLogic
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import com.bignerdranchguide.astromify.R
+import com.bignerdranchguide.astromify.cheating.CheatActivity
+import com.bignerdranchguide.astromify.cheating.EXTRA_ANSWER_SHOWN
 import com.bignerdranchguide.astromify.extensions.log
 import com.bignerdranchguide.astromify.lifecycle.LifecycleEventObserver
 import com.google.android.material.button.MaterialButton
@@ -22,8 +30,10 @@ private lateinit var resultAccuracyText: AppCompatTextView
 private lateinit var difficultyState: AppCompatImageView
 private lateinit var difficultyText: AppCompatTextView
 private lateinit var questionTitleText: AppCompatTextView
+private lateinit var cheatButton: AppCompatImageButton
 
 private const val KEY_INDEX = "index"
+private const val REQUEST_CODE_CHEAT = 0
 
 private val observer = LifecycleEventObserver()
 
@@ -52,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         difficultyState = findViewById(R.id.difficulty_state)
         difficultyText = findViewById(R.id.difficulty_text)
         questionTitleText = findViewById(R.id.question_title_book)
+        cheatButton = findViewById(R.id.cheat_button)
 
         trueButton.setOnClickListener {
             updateAnswer()
@@ -59,6 +70,7 @@ class MainActivity : AppCompatActivity() {
             hideTrueButton()
             hideFalseButton()
             showNextButton()
+            hideCheatButton()
             showAnswer()
         }
 
@@ -67,6 +79,7 @@ class MainActivity : AppCompatActivity() {
             checkAnswer(false)
             hideFalseButton()
             hideTrueButton()
+            hideCheatButton()
             showNextButton()
             showAnswer()
         }
@@ -78,6 +91,7 @@ class MainActivity : AppCompatActivity() {
                 hideNextButton()
                 showTrueButton()
                 showFalseButton()
+                showCheatButton()
                 hideAnswer()
                 updateQuestionNumber()
                 hideResultText()
@@ -97,11 +111,25 @@ class MainActivity : AppCompatActivity() {
                 hideDifficultyState()
                 hideQuestionText()
                 questionTitleText.setText(R.string.result)
-                questionBookNumber.text = "${(quizViewModel.correctAmount * 10)}%"
+                if (!quizViewModel.isCheater) {
+                    questionBookNumber.text = "${(quizViewModel.correctAmount * 10)}%"
+                } else {
+                    questionBookNumber.text
+                }
                 nextButton.setText(R.string.quit)
             }
         }
 
+        cheatButton.setOnClickListener {
+            val answerIsTrue = quizViewModel.currentQuestionAnswer
+            val answerText = quizViewModel.currentAnswerText
+            val questionNumber = quizViewModel.currentIndex + 1
+            val intent = CheatActivity.newIntent(
+                this@MainActivity,
+                answerIsTrue, answerText, questionNumber
+            )
+            startActivityForResult(intent, REQUEST_CODE_CHEAT)
+        }
         updateQuestion()
         updateAnswer()
         updateQuestionNumber()
@@ -113,13 +141,26 @@ class MainActivity : AppCompatActivity() {
         savedInstanceState.putInt(KEY_INDEX, quizViewModel.currentIndex)
     }
 
+    override fun onActivityResult(requestCode: Int,
+                                  resultCode: Int,
+                                  data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != Activity.RESULT_OK) {
+            return
+        }
+        if (requestCode == REQUEST_CODE_CHEAT) {
+            quizViewModel.isCheater =
+                data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
+        }
+    }
+
     private fun updateQuestion() {
         val questionTextResId = quizViewModel.currentQuestionText
         questionTextView.setText(questionTextResId)
     }
 
     private fun updateAnswer() {
-        val answerTextResId = quizViewModel.currentQuestionText
+        val answerTextResId = quizViewModel.currentAnswerText
         answerTextView.setText(answerTextResId)
     }
 
@@ -138,6 +179,11 @@ class MainActivity : AppCompatActivity() {
         }
         resultAccuracyText.setText(messageResId)
         showResultText()
+
+        if(quizViewModel.isCheater) {
+            Toast.makeText(this, "Cheater!", Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
     private fun hideFalseButton() {
@@ -172,6 +218,10 @@ class MainActivity : AppCompatActivity() {
         questionTextView.isVisible = false
     }
 
+    private fun hideCheatButton() {
+        cheatButton.isVisible = false
+    }
+
     private fun showFalseButton() {
         falseButton.isVisible = true
     }
@@ -190,5 +240,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun showResultText() {
         resultAccuracyText.isVisible = true
+    }
+
+    private fun showCheatButton() {
+        cheatButton.isVisible = true
     }
 }

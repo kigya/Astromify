@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_background"
-    tools:context=".MainActivity">
+    tools:context=".mainLogic.MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_left"
@@ -108,6 +108,8 @@
             android:layout_gravity="center"
             android:src="@drawable/ic_difficultylow" />
 
+
+
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -189,11 +191,25 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guide_right"
         app:layout_constraintStart_toStartOf="@+id/guide_left"
         app:layout_constraintTop_toBottomOf="@+id/question_text"
         tools:text="@string/answer_1" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/cheat_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="40dp"
+        android:minHeight="40dp"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_cheatbutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guide_right"
+        app:layout_constraintStart_toStartOf="@+id/guide_left"
+        app:layout_constraintTop_toBottomOf="@+id/question_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

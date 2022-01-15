@@ -1,4 +1,4 @@
-package com.bignerdranchguide.astromify
+package com.bignerdranchguide.astromify.mainLogic
 
 import androidx.annotation.StringRes
 

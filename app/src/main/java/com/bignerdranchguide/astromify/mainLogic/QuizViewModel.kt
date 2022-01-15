@@ -1,6 +1,7 @@
-package com.bignerdranchguide.astromify
+package com.bignerdranchguide.astromify.mainLogic
 
 import androidx.lifecycle.ViewModel
+import com.bignerdranchguide.astromify.R
 import com.bignerdranchguide.astromify.extensions.log
 
 class QuizViewModel : ViewModel() {
@@ -41,6 +42,7 @@ class QuizViewModel : ViewModel() {
 
     var currentIndex = 0
     var correctAmount = 0
+    var isCheater = false
 
     val currentQuestionAnswer: Boolean
         get() = questionBank[currentIndex].answer
@@ -54,4 +56,5 @@ class QuizViewModel : ViewModel() {
     fun moveToNext() {
         currentIndex += 1
     }
+
 }

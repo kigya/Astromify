@@ -30,4 +30,10 @@
     <string name="next">Next</string>
     <string name="result">Result</string>
     <string name="quit">Quit</string>
+    <string name="warning_text">Are you sure you want to do this?</string>
+    <string name="show_answer_button">Show Answer</string>
+    <string name="cheat_button">Cheat!</string>
+    <string name="judgment_toast">Cheating is wrong.</string>
+    <string name="answer">Answer</string>
+    <string name="back">Back</string>
 </resources>
